@@ -20,7 +20,5 @@ def main():
     print(curMax)
 
 
-
-
 if __name__ == '__main__':
     main()

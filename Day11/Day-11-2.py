@@ -10,7 +10,6 @@ def main():
     for line in file:
         seats.append(list(line.strip()))
     otherSeats = copy.deepcopy(seats)
-    count = 0
     while(True):
         seats = copy.deepcopy(otherSeats)
         oneTick()
@@ -37,25 +36,102 @@ def oneTick():
                 around.append(False)
             val = seats[y][x]
             if(val != '.'):
-                if(x != 0 and y !=0):
-                    around[0] = True if seats[y-1][x-1] == '#' else False
-                if(y != 0):
-                    around[1] = True if seats[y-1][x] == '#' else False
-                if(x != len(seats[0]) - 1 and y != 0):
-                    around[2] = True if seats[y-1][x+1] == '#' else False
-                if(x != 0):
-                    around[3] = True if seats[y][x-1] == '#' else False
-                if(x != len(seats[0]) - 1):
-                    around[4] = True if seats[y][x+1] == '#' else False
-                if(x != 0 and y != len(seats) - 1):
-                    around[5] = True if seats[y+1][x-1] == '#' else False
-                if(y != len(seats) - 1):
-                    around[6] = True if seats[y+1][x] == '#' else False
-                if(x != len(seats[0]) - 1 and y != len(seats) - 1):
-                    around[7] = True if seats[y+1][x+1] == '#' else False
+
+                #topLeft
+                vert = y - 1
+                horz = x - 1
+                while(vert >= 0 and horz >= 0):
+                    if(seats[vert][horz] == '#'):
+                        around[0] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert -= 1
+                    horz -= 1
+
+                #top
+                vert = y - 1
+                horz = x
+                while(vert >= 0):
+                    if(seats[vert][horz] == '#'):
+                        around[1] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert -= 1
+
+                #topRight
+                vert = y - 1
+                horz = x + 1
+                while(vert >= 0 and horz < len(seats[0])):
+                    if(seats[vert][horz] == '#'):
+                        around[2] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert -= 1
+                    horz += 1
+
+                #left
+                vert = y
+                horz = x - 1
+                while(horz >= 0):
+                    if(seats[vert][horz] == '#'):
+                        around[3] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    horz -= 1
+
+                #right
+                vert = y
+                horz = x + 1
+                while(horz < len(seats[0])):
+                    if(seats[vert][horz] == '#'):
+                        around[4] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    horz += 1
+
+                #botLeft
+                vert = y + 1
+                horz = x - 1
+                while(vert < len(seats) and horz >= 0):
+                    if(seats[vert][horz] == '#'):
+                        around[5] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert += 1
+                    horz -= 1
+
+                #bot
+                vert = y + 1
+                horz = x
+                while(vert < len(seats)):
+                    if(seats[vert][horz] == '#'):
+                        around[6] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert += 1
+
+                #botRight
+                vert = y + 1
+                horz = x + 1
+                while(vert < len(seats) and horz < len(seats[0])):
+                    if(seats[vert][horz] == '#'):
+                        around[7] = True
+                        break
+                    elif(seats[vert][horz] == 'L'):
+                        break
+                    vert += 1
+                    horz += 1
+
             if(val == 'L' and around.count(True) == 0):
                 otherSeats[y][x] = '#'
-            elif(val == '#' and around.count(True) >= 4):
+            elif(val == '#' and around.count(True) >= 5):
                 otherSeats[y][x] = 'L'
             else:
                 otherSeats[y][x] = val

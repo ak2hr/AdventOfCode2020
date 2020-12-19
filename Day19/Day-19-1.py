@@ -1,10 +1,9 @@
 from itertools import product
 
 rules = {}
-valid = set()
 
 def main():
-    file = open("Day19/test1.txt", "r")
+    file = open("Day19/input.txt", "r")
     for line in file:
         if(line == '\n'):
             break
@@ -13,12 +12,28 @@ def main():
         rules[num] = []
         for x in rule:
             rules[num].append(x.strip().split(' '))
-    print(rules)
-    print(solveRule(0))
+    valids = solveRule(0)
+    validCount = 0
+    for line in file:
+        if(line.strip() in valids):
+            validCount += 1
+    print(validCount)
 
 
 def solveRule(rule):
-    print('here')
+    if(rules[rule][0][0] == 'a'):
+        return 'a'
+    elif(rules[rule][0][0] == 'b'):
+        return 'b'
+    else:
+        potentials = []
+        for x in rules[rule]:
+            stringList = []
+            for y in x:
+                stringList.append(solveRule(int(y)))
+            for y in list(product(*stringList)):
+                potentials.append(''.join(y))
+        return potentials
     
     
 

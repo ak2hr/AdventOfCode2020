@@ -1,9 +1,11 @@
 from itertools import product
+import copy
 
 rules = {}
 
+
 def main():
-    file = open("Day19/input.txt", "r")
+    file = open("Day19/test2.txt", "r")
     for line in file:
         if(line == '\n'):
             break
@@ -12,12 +14,19 @@ def main():
         rules[num] = []
         for x in rule:
             rules[num].append(x.strip().split(' '))
-    valids = solveRule(0)
-    validCount = 0
+    fortyTwo = solveRule(42)
+    thirtyOne = solveRule(31)
+    print(thirtyOne)
+
+    valids = []
     for line in file:
-        if(line.strip() in valids):
-            validCount += 1
-    print(validCount)
+        valids.append(line.strip())
+
+    #check if starts with a multiple of rule 42
+    
+    #check if continues with multiple of rule 31
+
+    
 
 
 def solveRule(rule):

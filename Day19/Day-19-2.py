@@ -5,7 +5,7 @@ rules = {}
 
 
 def main():
-    file = open("Day19/test2.txt", "r")
+    file = open("Day19/input2.txt", "r")
     for line in file:
         if(line == '\n'):
             break
@@ -16,17 +16,34 @@ def main():
             rules[num].append(x.strip().split(' '))
     fortyTwo = solveRule(42)
     thirtyOne = solveRule(31)
-    print(thirtyOne)
+    length = len(fortyTwo[0])
 
     valids = []
     for line in file:
         valids.append(line.strip())
-
-    #check if starts with a multiple of rule 42
     
-    #check if continues with multiple of rule 31
-
-    
+    numValids = 0
+    for code in valids:
+        
+        found42 = 0
+        while(True):
+            if(code.startswith(tuple(fortyTwo))):
+                code = copy.copy(code[length:])
+                found42 += 1
+            else:
+                break
+        
+        if(found42 >= 2):
+            found31 = 0
+            while(True):
+                if(code.startswith(tuple(thirtyOne))):
+                    code = copy.copy(code[length:])
+                    found31 += 1
+                else:
+                    break
+            if(found31 > 0 and found31 < found42 and len(code) == 0):
+                numValids += 1
+    print(numValids)
 
 
 def solveRule(rule):

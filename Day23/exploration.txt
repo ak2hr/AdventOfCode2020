@@ -18,3 +18,5 @@
 
 - if cups to left of curCup is curCup - 1, the three cups right of curCup get picked up and placed directly behind curCup, so basically curCup itself just gets picked up and moved forward 3 spaces
 - can maybe use this to speed up process?
+
+-instead of a list, use a dictionary where each key is a cup, and the value for that key is the cup that it points to

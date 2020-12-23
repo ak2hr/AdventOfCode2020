@@ -1,0 +1,20 @@
+- need to know where cup 1 is
+- need to know which two cups are to the right of cup 1
+
+- check and see if cycle repeats in a pattern
+- check and see if the position of a cup moves in a distinguishable way
+- check and see if an index is filled by cups with a pattern
+- break down the rules and see if there's something special about them
+
+- wants cup 1 and two cups next to it. Something to do with when three cups are picked up?
+- cups next to 1 change when:
+	- 1 is picked up, but is not first to be picked up
+	- 1 is curCup, so three cups next to 1 are picked up
+	- 1 is destination cup
+	- the cup right next to 1 is destination cup
+- when 1 is curCup, potential destination cups decrease from 1 million
+
+- HAVE to keep track of where all of the cups are in order to handle picking up cups, destination cup location, etc
+
+- if cups to left of curCup is curCup - 1, the three cups right of curCup get picked up and placed directly behind curCup, so basically curCup itself just gets picked up and moved forward 3 spaces
+- can maybe use this to speed up process?
